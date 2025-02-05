@@ -16,21 +16,23 @@ const Navbar = ({ user }) => {
 
   return (
     <nav className="bg-white shadow-lg">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+      <div className="navbar">
+       
           <div className="flex items-center space-x-8">
             <Link to="/" className="text-xl font-bold text-pink-600">
               Cake Store
             </Link>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/products"
-                className="text-gray-700 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Products
-              </Link>
-            </div>
           </div>
+
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              to="/products"
+              className="text-gray-700 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Products
+            </Link>
+          </div>
+        
 
           <div className="flex items-center space-x-4">
             {user ? (
@@ -54,7 +56,7 @@ const Navbar = ({ user }) => {
               </Link>
             )}
           </div>
-        </div>
+        
       </div>
     </nav>
   );

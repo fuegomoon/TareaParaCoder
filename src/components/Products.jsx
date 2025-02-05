@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import cheescake from './images/cheescake.jpg';
-import pistachio from './images/pistachio.jpg';
-import tiramisu from './images/tiramisu.jpg';
-import chiffon from './images/chiffon.jpg';
-import chocolate from './images/chocolate.jpg';
-import rosewater from './images/raspberyy-rosewater.jpg';  
+import './Products.css';
+import cheescake from '../images/cheescake.jpeg';
+import pistachio from '../images/pistachio.jpeg';
+import tiramisu from '../images/tiramisu.jpeg';
+import chiffon from '../images/chiffon.jpeg';
+import chocolate from '../images/chocolate-cake.jpeg';
+import rosewater from '../images/raspberry-rosewater.jpeg';
 
 const products = [
   { id: 1, name: 'Chocolate Dream', price: 8.900, image: chocolate },
@@ -26,7 +27,7 @@ const Products = ({ addToCart }) => {
           <div key={product.id} className="product-card">
             <Link 
               to={`/products/${product.id}`}
-              className="text-lg font-medium text-gray-800 hover:text-pink-500"
+              className="cake-title"
             >
               {product.name}
             </Link>
