@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import './Products.css';
+=======
+>>>>>>> ae6534a (Fix image imports and paths)
 import cheescake from '../images/cheescake.jpeg';
 import pistachio from '../images/pistachio.jpeg';
 import tiramisu from '../images/tiramisu.jpeg';
@@ -14,8 +17,7 @@ const products = [
   { id: 3, name: 'Strawberry Chiffon', price: 9.900, image: chiffon },
   { id: 4, name: 'Tiramisu', price: 9.000, image: tiramisu },
   { id: 5, name: 'Cheescake', price: 11.000, image: cheescake },
-  { id: 6, name: 'Rasberry Rosewater Cake', price: 14.000,  image: rosewater },
-
+  { id: 6, name: 'Raspberry Rosewater Cake', price: 14.000,  image: rosewater },
 ];
 
 const Products = ({ addToCart }) => {
@@ -47,10 +49,3 @@ const Products = ({ addToCart }) => {
 };
 
 export default Products;
-
-
-
-
-
-
-
