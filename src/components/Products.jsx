@@ -1,15 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import './Products.css';
-=======
->>>>>>> ae6534a (Fix image imports and paths)
-import cheescake from '../images/cheescake.jpeg';
-import pistachio from '../images/pistachio.jpeg';
-import tiramisu from '../images/tiramisu.jpeg';
-import chiffon from '../images/chiffon.jpeg';
-import chocolate from '../images/chocolate-cake.jpeg';
-import rosewater from '../images/raspberry-rosewater.jpeg';
+import cheescake from './images/cheescake.jpeg';
+import pistachio from './images/pistachio.jpeg';
+import tiramisu from './images/tiramisu.jpeg';
+import chiffon from './images/chiffon.jpeg';
+import chocolate from './images/chocolate.jpeg';
+import rosewater from './images/raspberry-rosewater.jpeg';  
 
 const products = [
   { id: 1, name: 'Chocolate Dream', price: 8.900, image: chocolate },

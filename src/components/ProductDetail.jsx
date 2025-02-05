@@ -7,7 +7,7 @@ const products = [
   { id: 3, name: 'Strawberry Chiffon', description: 'Organic strawberries, fresh cream, layers of french cake, topped with and exquisitely light chiffon cream frosting', price: 9.900},
   { id: 4, name: 'Tiramisu', description: 'Velvety mélange of gluten-free ladyfingers dipped in espresso, layered with delicately sweetened whipped eggs and mascarpone cheese, and topped with a dusting of cocoa powder.', price: 9.000 },
   { id: 5, name: 'Cheesecake', description: 'Velvety Cheesecake topped with fresh, organic raspberries. ', price: 11.000 },
-  { id: 6, name: 'Rasberry Rosewater Cake', description: 'A floral-infused cake with raspberry compote and delicate rose buttercream.', price: 14.000 },
+  { id: 6, name: 'Raspberry Rosewater Cake', description: 'A floral-infused cake with raspberry compote and delicate rose buttercream.', price: 14.000 },
  
 ];
 
