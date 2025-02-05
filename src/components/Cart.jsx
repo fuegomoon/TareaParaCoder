@@ -1,13 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
+import { saveCartToFirebase, createOrder } from '../services/cartService';
 
-const Cart = ({ items, addToCart, removeFromCart, updateQuantity }) => {
+const Cart = ({ items, addToCart, removeFromCart, updateQuantity, userId }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  // Save cart to Firebase whenever items change
+  useEffect(() => {
+    if (userId && items.length > 0) {
+      saveCartToFirebase(userId, items).catch(console.error);
+    }
+  }, [items, userId]);
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = async () => {
+    if (!userId) {
+      alert('Please log in to checkout');
+      return;
+    }
+
+    try {
+      setIsCheckingOut(true);
+      
+      // You can collect user details here through a form if needed
+      const userDetails = {
+        // Add user details as needed
+        email: 'user@example.com', // Get this from your auth context
+        // Add shipping details, etc.
+      };
+
+      const orderId = await createOrder(userId, items, userDetails);
+      
+      // Clear local cart after successful order
+      items.forEach(item => removeFromCart(item.id));
+      
+      alert(`Order placed successfully! Order ID: ${orderId}`);
+      setIsOpen(false);
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert('Error during checkout. Please try again.');
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   const cartStyle = {
     position: 'fixed',
@@ -175,18 +215,19 @@ const Cart = ({ items, addToCart, removeFromCart, updateQuantity }) => {
                     </div>
                     
                     <button 
-                      onClick={() => alert('Checkout functionality to be implemented!')}
+                      onClick={handleCheckout}
+                      disabled={isCheckingOut}
                       style={{
                         width: '100%',
-                        backgroundColor: '#ec4899',
+                        backgroundColor: isCheckingOut ? '#d1d5db' : '#ec4899',
                         color: 'white',
                         padding: '8px 16px',
                         borderRadius: '8px',
                         border: 'none',
-                        cursor: 'pointer'
+                        cursor: isCheckingOut ? 'not-allowed' : 'pointer'
                       }}
                     >
-                      Checkout
+                      {isCheckingOut ? 'Processing...' : 'Checkout'}
                     </button>
                   </div>
                 </>

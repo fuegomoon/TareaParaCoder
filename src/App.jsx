@@ -6,9 +6,10 @@ import Home from './components/Home';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import NotFound from './components/NotFound';
+import Login from './components/Login';
 import Cart from './components/Cart';
 import {doc, getDoc, getFirestore} from "firebase/firestore";
-import {firebaseApp} from './main';
+import {db} from "./components/FirebaseConfig";
 
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
   const [products, setProducts] = useState({});
 
   useEffect(() => {
-    const db = getFirestore(firebaseApp);
+    // const db = getFirestore(firebaseApp);
 
     const productsRef = doc(db, "items", "nRigQphfJqK6wx9AaeNE");
     getDoc(productsRef).then((snapshot) => {
@@ -75,6 +76,7 @@ const App = () => {
       />
       <main className="content-section">
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products addToCart={addToCart} />} />
           <Route 

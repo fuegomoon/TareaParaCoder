@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cheescake from './images/cheescake.jpg';
+import pistachio from './images/pistachio.jpg';
+import tiramisu from './images/tiramisu.jpg';
+import chiffon from './images/chiffon.jpg';
+import chocolate from './images/chocolate.jpg';
+import rosewater from './images/raspberyy-rosewater.jpg';  
 
 const products = [
-  { id: 1, name: 'Chocolate Dream', price: 8.900 },
-  { id: 2, name: 'Pistachio', price: 10.500 },
-  { id: 3, name: 'Strawberry Chiffon', price: 9.900 },
-  { id: 4, name: 'Tiramisu', price: 9.000 },
-  { id: 5, name: 'Cheescake', price: 11.000 },
-  { id: 6, name: 'Rasberry Rosewater Cake', price: 14.000 },
+  { id: 1, name: 'Chocolate Dream', price: 8.900, image: chocolate },
+  { id: 2, name: 'Pistachio', price: 10.500, image: pistachio },
+  { id: 3, name: 'Strawberry Chiffon', price: 9.900, image: chiffon },
+  { id: 4, name: 'Tiramisu', price: 9.000, image: tiramisu },
+  { id: 5, name: 'Cheescake', price: 11.000, image: cheescake },
+  { id: 6, name: 'Rasberry Rosewater Cake', price: 14.000,  image: rosewater },
 
 ];
 
@@ -24,6 +30,7 @@ const Products = ({ addToCart }) => {
             >
               {product.name}
             </Link>
+            <img className='cake-image' src={product.image} alt={product.name} />
             <p className="text-gray-600">${product.price}</p>
             <button
               onClick={() => addToCart(product)}

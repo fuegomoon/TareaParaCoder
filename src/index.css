@@ -26,7 +26,7 @@ html, body {
 }
 
 body {
-  background-color: #f9f9f9;
+  background-color: #e981d1;
   color: #333;
 }
 
@@ -112,6 +112,12 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
+}
+
+.eating-cake {
+  width:50%;
+  margin-top: 30px;
+  height: auto;
 }
 
 @media (prefers-color-scheme: light) {
