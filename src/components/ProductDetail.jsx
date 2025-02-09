@@ -1,30 +1,95 @@
-import React from 'react';
+// src/components/ProductDetail.jsx
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getProductById } from '../services/cartService';
+import './ProductDetail.css';
 
-const products = [
-  { id: 1, name: 'Chocolate Dream', description: 'Rich chocolate cake with chocolate butter cream frosting.', price: 8.900 },
-  { id: 2, name: 'Pistachio', description: 'Light spongecake with creamy pistachio frosting.', price: 10.500 },
-  { id: 3, name: 'Strawberry Chiffon', description: 'Organic strawberries, fresh cream, layers of french cake, topped with and exquisitely light chiffon cream frosting', price: 9.900},
-  { id: 4, name: 'Tiramisu', description: 'Velvety mélange of gluten-free ladyfingers dipped in espresso, layered with delicately sweetened whipped eggs and mascarpone cheese, and topped with a dusting of cocoa powder.', price: 9.000 },
-  { id: 5, name: 'Cheesecake', description: 'Velvety Cheesecake topped with fresh, organic raspberries. ', price: 11.000 },
-  { id: 6, name: 'Raspberry Rosewater Cake', description: 'A floral-infused cake with raspberry compote and delicate rose buttercream.', price: 14.000 },
- 
-];
+// Import images
+import cheescake from '../images/cheescake.jpeg';
+import pistachio from '../images/pistachio.jpeg';
+import tiramisu from '../images/tiramisu.jpeg';
+import chiffon from '../images/chiffon.jpeg';
+import chocolateCake from '../images/chocolate-cake.jpeg';
+import raspberryRosewater from '../images/raspberry-rosewater.jpeg';
 
-const ProductDetail = () => {
+// Create image mapping object
+const images = {
+  'cheescake.jpeg': cheescake,
+  'pistachio.jpeg': pistachio,
+  'tiramisu.jpeg': tiramisu,
+  'chiffon.jpeg': chiffon,
+  'chocolate-cake.jpeg': chocolateCake,
+  'raspberry-rosewater.jpeg': raspberryRosewater
+};
+
+const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = products.find((p) => p.id === parseInt(id));
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!product) {
-    return <p>Product not found!</p>;
-  }
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productData = await getProductById(id);
+        if (productData) {
+          setProduct({
+            ...productData,
+            imageUrl: images[productData.imageUrl]
+          });
+        } else {
+          setError('Product not found');
+        }
+      } catch (err) {
+        setError('Error fetching product details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div className="loading">Loading product details...</div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!product) return <div className="error">Product not found</div>;
 
   return (
-    <div className='products'>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
-      <button onClick={() => navigate(-1)}>Go Back</button>
+    <div className="product-detail-container">
+      <button 
+        onClick={() => navigate('/products')} 
+        className="back-button"
+      >
+        ← Back to Products
+      </button>
+      
+      <div className="product-detail-content">
+        <div className="product-detail-image">
+          {product.imageUrl && (
+            <img 
+              src={product.imageUrl} 
+              alt={product.name} 
+              className="detail-image"
+            />
+          )}
+        </div>
+        
+        <div className="product-detail-info">
+          <h1 className="detail-title">{product.name}</h1>
+          <p className="detail-price">${product.price}</p>
+          <div className="detail-description">
+            <h2>Description</h2>
+            <p>{product.description}</p>
+          </div>
+          <button
+            onClick={() => addToCart(product)}
+            className="detail-add-to-cart"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
